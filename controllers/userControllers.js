@@ -3,16 +3,13 @@ const UserModel  = require('../models/userModel');
 // fetch or get the users
 const getUsers = async (req, res) => {
     try {
-        const dataResponse = await UserModel.find({});
+        const dataResponse = await UserModel.find();
+        if(!dataResponse.length) return res.status(204).json({ message: 'No users found.'})
         res.status(200).json(dataResponse);
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: err, message: "Something went wrong" });
     }
-
-    // to test in postman only
-    // console.log(req.body)
-    // res.send(req.body)
 }
 
 
